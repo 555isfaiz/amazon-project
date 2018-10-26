@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dwr>
+	<allow>
+	  <create javascript="viewPhotoService" creator="new">
+	    <param name="class" value="com.amazons.photowork.dwr.impl.DwrViewPhotoServiceImpl"/>
+	  </create>
+	  <convert match="com.amazons.photowork.Photo" converter="bean">
+	  	<param name="include" value="ID,URL"></param>
+	  </convert>
+	</allow>
+</dwr>

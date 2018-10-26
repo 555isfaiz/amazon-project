@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr" xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+    http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.directwebremoting.org/schema/spring-dwr 
+    http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx.xsd">
+<dwr:controller id="dwrController" debug="true" />
+  <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="alwaysUseFullPath" value="true" />
+    <property name="mappings">
+      <props>
+        <prop key="/dwr/**/*">dwrController</prop>
+      </props>
+    </property>
+  </bean>
+
+  <dwr:configuration>
+
+    <dwr:convert type="bean" class="com.amazons.photowork.Photo" />
+    <dwr:convert type="bean" class="com.amazons.photowork.Comment" />
+  </dwr:configuration>
+  <bean id="dwrViewPhotoService" class="com.amazons.photowork.dwr.impl.DwrViewPhotoServiceImpl">
+    <property name="viewPhotoService" ref="viewPhotoService" />
+    <dwr:remote javascript="viewPhotoService">
+      <dwr:include method="getPhotos" />
+      <dwr:include method="addComments" />
+      <dwr:include method="searchPhotos" />
+      <dwr:include method="sharePhoto" />
+      <dwr:include method="getPhotoDetail" />
+      <dwr:include method="getComments" />
+    </dwr:remote>
+  </bean>
+</beans>

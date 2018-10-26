@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+     <property name="maxUploadSize" value="104857600" />
+     <property name="maxInMemorySize" value="4096" />
+     <property name="defaultEncoding" value="UTF-8"></property>
+     </bean>
+     <bean id="uploadPhotoService" class="com.amazons.photowork.upload.impl.UploadPhotoServiceImpl"></bean>
+     <bean id="viewPhotoService" class="com.amazons.photowork.view.impl.ViewPhotosServiceImpl"></bean>
+     <bean id="dwrViewPhotoService" class="com.amazons.photowork.dwr.impl.DwrViewPhotoServiceImpl"></bean>
+     <bean id="homeController" class="com.amazons.photowork.HomeController">
+      <property name="uploadPhotoService" ref="uploadPhotoService" />
+     </bean>
+</beans>
